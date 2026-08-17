@@ -847,38 +847,3 @@ struct BusinessCardScanView: UIViewControllerRepresentable {
 18. 다크모드 / Dynamic Type 검증
 19. iPad 멀티태스킹 검증
 20. 앱 아이콘 / 스플래시 화면
-
----
-
-## ✅ 구현 시 주의사항
-
-1. **SwiftData `@Model`에는 enum을 직접 저장 불가** → `rawValue: String`으로 저장 후 computed property로 변환
-2. **VNDocumentCameraViewController는 시뮬레이터에서 동작 안 함** → 실기기 테스트 필수, 시뮬레이터용 Mock 데이터 준비
-3. **OCR 정확도** → `recognitionLevel = .accurate` 설정, 조명/각도에 따라 결과 편차 발생하므로 수동 수정 UI 반드시 제공
-4. **CSV UTF-8 BOM** → Excel에서 한글 깨짐 방지를 위해 파일 앞에 `\u{FEFF}` 반드시 추가
-5. **SwiftData + CloudKit** → `@Model` 프로퍼티에 Optional 또는 기본값 필수 (CloudKit 스키마 제약)
-6. **명함 이미지 저장** → SwiftData에 Data 직접 저장 지양, FileManager 경로 저장 후 참조
-7. **iPad NavigationSplitView** → `columnVisibility` 상태 관리로 사이드바 자동 접힘 처리
-
----
-
-## 🚀 Claude Code 실행 명령어
-
-```bash
-# 1. 프로젝트 생성 (Xcode CLI)
-xcodebuild -create-xcodeproj BizNote
-
-# 2. 의존성 추가 (Package.swift 또는 Xcode UI)
-# File > Add Package Dependencies > XLSXF URL 입력
-
-# 3. 시뮬레이터 빌드 확인
-xcodebuild -scheme BizNote -destination 'platform=iOS Simulator,name=iPhone 16 Pro' build
-
-# 4. iPad 시뮬레이터 빌드 확인
-xcodebuild -scheme BizNote -destination 'platform=iOS Simulator,name=iPad Pro 13-inch (M4)' build
-```
-
----
-
-*이 프롬프트를 Claude Code에 전달하여 BizNote 앱을 단계적으로 구현하세요.*
-*각 Phase가 완료될 때마다 빌드 오류 없이 컴파일되는지 확인 후 다음 단계로 진행하세요.*
